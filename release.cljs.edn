@@ -1,0 +1,4 @@
+{:main myapp.ui.core
+ :output-dir "target/release/war/js"
+ :output-to "target/release/war/js/app.js"
+ :asset-path "js"}

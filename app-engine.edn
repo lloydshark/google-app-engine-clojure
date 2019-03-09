@@ -1,0 +1,2 @@
+{:servlets              [myapp.server.servlet.app]
+ :dev-server-nrepl-port 8888}

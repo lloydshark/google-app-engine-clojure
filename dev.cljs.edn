@@ -1,0 +1,6 @@
+^{:watch-dirs ["src/cljs"]
+  :open-url "http://localhost:8080/index.html"}
+{:main myapp.ui.core
+ :output-dir "target/dev/war/js"
+ :output-to "target/dev/war/js/app.js"
+ :asset-path "js"}

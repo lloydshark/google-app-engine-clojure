@@ -1,0 +1,27 @@
+{:deps    {org.clojure/clojure {:mvn/version "1.9.0"}}
+
+ :paths   []
+
+ :aliases {:ui             {:extra-deps  {com.bhauman/figwheel-main       {:mvn/version "0.1.9"}}
+                            :extra-paths ["src/cljs"]}
+
+           :ui-dev         {:main-opts   ["-m" "figwheel.main" "-b" "dev" "-r"]
+                            :extra-deps  {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}
+                            :extra-paths ["target"]}
+
+           :ui-prod        {:main-opts ["-m" "figwheel.main" "-O" "advanced" "-bo" "release"]}
+
+
+           :server         {:extra-deps  {com.google.appengine/appengine-api-1.0-sdk {:mvn/version "1.9.69"}
+                                          ring/ring-core                             {:mvn/version "1.7.1"}
+                                          ring/ring-servlet                          {:mvn/version "1.7.1"}
+                                          javax.servlet/javax.servlet-api            {:mvn/version "3.1.0"}
+                                          nrepl/nrepl                                {:mvn/version "0.6.0"}}
+                            :extra-paths ["src/clj"]}
+
+           :dev-server     {:extra-paths ["target/dev/war/classes"]}
+
+           :release-server {:extra-paths ["target/release/war/classes"]}
+
+           :build-tools    {:extra-deps  {org.clojure/tools.deps.alpha {:mvn/version "0.6.488"}}
+                            :extra-paths ["src/tools"]}}}
