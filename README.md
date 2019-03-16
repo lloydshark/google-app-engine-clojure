@@ -65,12 +65,10 @@ This example app uses:
 
 ```Edit app-engine.edn if you wish to change the default nrepl port from 8888.```
 
-#### Roadmap
+#### TODO
 
-- Examples of using the datastore (with matching UI).
-- Provide a template.
+- Provide a template?
 - Unit Testing Server.
 - Unit Testing UI.
 - Logging.
 - Add Re-Frame?
-- Add Bidi?

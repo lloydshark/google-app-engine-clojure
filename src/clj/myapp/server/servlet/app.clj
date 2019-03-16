@@ -3,6 +3,7 @@
             [myapp.server.app :as app])
   (:gen-class :extends javax.servlet.http.HttpServlet))
 
-(ring-servlet/defservice app/handler)
+;; By wrapping this in a handler fn it means app/handler can be reloaded in a REPL session...
+(defn handler [request] (app/handler request))
 
-
+(ring-servlet/defservice handler)

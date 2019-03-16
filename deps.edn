@@ -2,7 +2,7 @@
 
  :paths   []
 
- :aliases {:ui             {:extra-deps  {com.bhauman/figwheel-main       {:mvn/version "0.1.9"}}
+ :aliases {:ui             {:extra-deps  {com.bhauman/figwheel-main {:mvn/version "0.1.9"}}
                             :extra-paths ["src/cljs"]}
 
            :ui-dev         {:main-opts   ["-m" "figwheel.main" "-b" "dev" "-r"]
@@ -12,7 +12,9 @@
            :ui-prod        {:main-opts ["-m" "figwheel.main" "-O" "advanced" "-bo" "release"]}
 
 
-           :server         {:extra-deps  {com.google.appengine/appengine-api-1.0-sdk {:mvn/version "1.9.69"}
+           :server         {:extra-deps  {bidi                                       {:mvn/version "2.1.5"}
+                                          cheshire                                   {:mvn/version "5.8.1"}
+                                          com.google.appengine/appengine-api-1.0-sdk {:mvn/version "1.9.69"}
                                           ring/ring-core                             {:mvn/version "1.7.1"}
                                           ring/ring-servlet                          {:mvn/version "1.7.1"}
                                           javax.servlet/javax.servlet-api            {:mvn/version "3.1.0"}
@@ -24,4 +26,7 @@
            :release-server {:extra-paths ["target/release/war/classes"]}
 
            :build-tools    {:extra-deps  {org.clojure/tools.deps.alpha {:mvn/version "0.6.488"}}
-                            :extra-paths ["src/tools"]}}}
+                            :extra-paths ["src/tools"]}}
+
+ :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
+             "clojars" {:url "https://repo.clojars.org/"}}}
