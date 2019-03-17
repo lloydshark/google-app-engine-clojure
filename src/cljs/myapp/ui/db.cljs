@@ -1,5 +1,6 @@
 (ns myapp.ui.db)
 
-(def default-db
-  {:label-edit ""
+(def initial-db
+  {:origin     js/window.location.href
+   :label-edit ""
    :widgets    []})

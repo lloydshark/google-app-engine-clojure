@@ -6,22 +6,23 @@
     [myapp.ui.db :as db]))
 
 (re-frame/reg-event-db ::initialize-db
-                       (fn [_ _] db/default-db))
+                       (fn [_ _] db/initial-db))
 
 (re-frame/reg-event-fx ::fetch-widgets
-                       (fn [_ _]
+                       (fn [{origin :origin} _]
                          {:http-xhrio {:method          :get
-                                       :uri             "http://localhost:8080/api/list"
+                                       :uri             (str origin "/api/list")
                                        :timeout         8000
                                        :response-format (ajax/json-response-format)
                                        :on-success      [::on-widget-fetch]
                                        :on-failure      [::bad-http-result]}}))
 
 (re-frame/reg-event-fx ::add-widget
-                       (fn [{db :db} _]
+                       (fn [{origin :origin
+                             db     :db} _]
                          {:db         (assoc db :label-edit "")
                           :http-xhrio {:method          :post
-                                       :uri             "http://localhost:8080/api/store"
+                                       :uri             (str origin "/api/store")
                                        :params          {:label (:label-edit db)}
                                        :timeout         8000
                                        :format          (ajax/json-request-format)
@@ -30,9 +31,9 @@
                                        :on-failure      [::bad-http-result]}}))
 
 (re-frame/reg-event-fx ::delete-widget
-                       (fn [_ [_event id]]
+                       (fn [{origin :origin} [_event id]]
                          {:http-xhrio {:method          :post
-                                       :uri             "http://localhost:8080/api/delete"
+                                       :uri             (str origin "/api/delete")
                                        :params          {:id id}
                                        :timeout         8000
                                        :format          (ajax/json-request-format)

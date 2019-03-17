@@ -22,6 +22,8 @@ See https://cloud.google.com/appengine/docs/standard/java/quickstart
 
 - Build and Run the DevServer.
 
+In dev mode an extra servlet is deployed which supplies a nrepl that you can attach to.
+
 ```./scripts/build-and-run-dev-server.sh```
 
 - Connect a Server Dev Repl
@@ -32,7 +34,12 @@ Create a Remote Repl -> Connect to Server -> Host: localhost, Port: 8888
 
 - Build and Run the Dev UI.
 
+The dev build of the UI ensures that the built UI can be served by the dev server (above).
+
 ```./scripts/build-and-run-dev-ui.sh```
+
+So now you have the standard app engine dev server running with an attached nrepl, the UI is also being served
+by the standard dev server - plus any UI code changes are being pushed to the server by figwheel main.
 
 #### Why?
 
@@ -49,13 +56,14 @@ and hopeful implementation simplicity.
 
 This example app uses:
 
-- Clojure Tools Deps & the CLI
-- Ring
-- nRepl
-- Figwheel Main
-- Standard Google App Engine Tooling
+- [Clojure Tools Deps & the CLI](https://clojure.org/guides/deps_and_cli)
+- [Ring](https://github.com/ring-clojure/ring)
+- [nRepl](https://nrepl.org/)
+- [Figwheel Main](https://figwheel.org/)
+- [Standard Google App Engine Tooling](https://cloud.google.com/appengine/docs/standard/java/download)
 
-Plus bidi for server side routing, re-frame and soda-ash on the front end some basic usage of the Datastore
+Also [bidi](https://github.com/juxt/bidi) for server side routing, [re-frame](https://github.com/Day8/re-frame)
+and [soda-ash](https://github.com/gadfly361/soda-ash) on the front end plus some basic usage of the Datastore
 to make the example app slightly more real.
 
 #### How To
@@ -77,6 +85,7 @@ Make sure you edit app-engine-deploy.properties to set your application id.
 
 #### TODO
 
-- Unit Testing Server.
-- Unit Testing UI.
-- Logging.
+- Keep the local db around between builds.
+- Package the datastore indexes.
+- Unit Testing the Server.
+- Unit Testing the UI.
