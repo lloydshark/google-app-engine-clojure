@@ -13,7 +13,14 @@
                    :properties (-> (slurp (:body request))
                                    (json/parse-string true))})
   {:status 201
-   :body   "OK"})
+   :body   (json/generate-string {:status "OK"})})
+
+(defn delete-widget [request]
+  (datastore/delete "widget" (-> (slurp (:body request))
+                                 (json/parse-string true)
+                                 (:id)))
+  {:status 201
+   :body   (json/generate-string {:status "OK"})})
 
 (defn wrap-not-found [handler]
   (fn [request]
@@ -22,6 +29,7 @@
 
 (def handler
   (-> (bidi/make-handler
-        ["/app" {"/list"  list-widgets
-                 "/store" {:post save-widget}}])
+        ["/api" {"/list"  list-widgets
+                 "/store" save-widget
+                 "/delete" delete-widget}])
       wrap-not-found))

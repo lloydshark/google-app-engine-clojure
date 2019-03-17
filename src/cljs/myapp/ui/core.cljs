@@ -1,21 +1,28 @@
-(ns ^:figwheel-hooks myapp.ui.core
-  (:require [goog.dom :as gdom]))
+(ns myapp.ui.core
+  (:require
+   [reagent.core :as reagent]
+   [re-frame.core :as re-frame]
+   [myapp.ui.events :as events]
+   [myapp.ui.views :as views]
+   [myapp.ui.config :as config]
+   ))
 
-(println "This text is printed from myapp/ui/core.cljs. Go ahead and edit it and see reloading in action.")
+(defn dev-setup []
+  (when config/debug?
+    (enable-console-print!)
+    (println "dev mode")))
 
-(defn multiply [a b] (* a b))
+(defn mount-root []
+  (re-frame/clear-subscription-cache!)
+  (reagent/render [views/home]
+                  (.getElementById js/document "app")))
 
-;; define your app data so that it doesn't get over-written on reload
-(defonce app-state (atom {:text "Hello world!"}))
-
-(defn get-app-element []
-  (gdom/getElement "app"))
-
-
+(defn ^:export init []
+  (re-frame/dispatch-sync [::events/initialize-db])
+  (re-frame/dispatch [::events/fetch-widgets])
+  (dev-setup)
+  (mount-root))
 
 ;; specify reload hook with ^;after-load metadata
 (defn ^:after-load on-reload []
-  ;; optionally touch your app-state to force rerendering depending on
-  ;; your application
-  ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+  (mount-root))

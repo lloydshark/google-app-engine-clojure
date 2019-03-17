@@ -1,32 +1,36 @@
-{:deps    {org.clojure/clojure {:mvn/version "1.9.0"}}
+{:deps      {org.clojure/clojure {:mvn/version "1.9.0"}}
 
- :paths   []
+ :paths     []
 
- :aliases {:ui             {:extra-deps  {com.bhauman/figwheel-main {:mvn/version "0.1.9"}}
-                            :extra-paths ["src/cljs"]}
+ :aliases   {:ui             {:extra-deps  {com.bhauman/figwheel-main {:mvn/version "0.1.9"}
+                                            reagent                   {:mvn/version "0.8.1"}
+                                            day8.re-frame/http-fx     {:mvn/version "0.1.6"}
+                                            re-frame                  {:mvn/version "0.10.6"}
+                                            soda-ash                  {:mvn/version "0.83.0"}}
+                              :extra-paths ["src/cljs"]}
 
-           :ui-dev         {:main-opts   ["-m" "figwheel.main" "-b" "dev" "-r"]
-                            :extra-deps  {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}
-                            :extra-paths ["target"]}
+             :ui-dev         {:main-opts   ["-m" "figwheel.main" "-b" "dev" "-r"]
+                              :extra-deps  {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}
+                              :extra-paths ["target"]}
 
-           :ui-prod        {:main-opts ["-m" "figwheel.main" "-O" "advanced" "-bo" "release"]}
+             :ui-prod        {:main-opts ["-m" "figwheel.main" "-O" "advanced" "-bo" "release"]}
 
 
-           :server         {:extra-deps  {bidi                                       {:mvn/version "2.1.5"}
-                                          cheshire                                   {:mvn/version "5.8.1"}
-                                          com.google.appengine/appengine-api-1.0-sdk {:mvn/version "1.9.69"}
-                                          ring/ring-core                             {:mvn/version "1.7.1"}
-                                          ring/ring-servlet                          {:mvn/version "1.7.1"}
-                                          javax.servlet/javax.servlet-api            {:mvn/version "3.1.0"}
-                                          nrepl/nrepl                                {:mvn/version "0.6.0"}}
-                            :extra-paths ["src/clj"]}
+             :server         {:extra-deps  {bidi                                       {:mvn/version "2.1.5"}
+                                            cheshire                                   {:mvn/version "5.8.1"}
+                                            com.google.appengine/appengine-api-1.0-sdk {:mvn/version "1.9.69"}
+                                            ring/ring-core                             {:mvn/version "1.7.1"}
+                                            ring/ring-servlet                          {:mvn/version "1.7.1"}
+                                            javax.servlet/javax.servlet-api            {:mvn/version "3.1.0"}
+                                            nrepl/nrepl                                {:mvn/version "0.6.0"}}
+                              :extra-paths ["src/clj"]}
 
-           :dev-server     {:extra-paths ["target/dev/war/classes"]}
+             :dev-server     {:extra-paths ["target/dev/war/classes"]}
 
-           :release-server {:extra-paths ["target/release/war/classes"]}
+             :release-server {:extra-paths ["target/release/war/classes"]}
 
-           :build-tools    {:extra-deps  {org.clojure/tools.deps.alpha {:mvn/version "0.6.488"}}
-                            :extra-paths ["src/tools"]}}
+             :build-tools    {:extra-deps  {org.clojure/tools.deps.alpha {:mvn/version "0.6.488"}}
+                              :extra-paths ["src/tools"]}}
 
  :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
              "clojars" {:url "https://repo.clojars.org/"}}}

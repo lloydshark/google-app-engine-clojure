@@ -3,7 +3,10 @@
                                                DatastoreService
                                                Entity
                                                Query
-                                               FetchOptions$Builder)))
+                                               FetchOptions$Builder
+                                               KeyFactory)))
+
+;; Simplified example(s) of using the Datastore...
 
 (defn ->Entity
   "Take a Clojure map - and produce an Entity that works with the datastore."
@@ -19,13 +22,17 @@
   (reduce (fn [entity [name value]]
             (assoc-in entity [:properties (keyword name)] value))
           {:kind       (.getKind Entity)
+           :id         (.getId (.getKey Entity))
            :properties {}}
           (.getProperties Entity)))
 
-(defn save
-  [entity]
+(defn save [entity]
   (let [^DatastoreService datastore-service (DatastoreServiceFactory/getDatastoreService)]
     (.put datastore-service ^Entity (->Entity entity))))
+
+(defn delete [^String kind ^long id]
+  (let [^DatastoreService datastore-service (DatastoreServiceFactory/getDatastoreService)]
+    (.delete datastore-service [(KeyFactory/createKey kind id)])))
 
 (defn fetch [kind]
   (let [^DatastoreService datastore-service (DatastoreServiceFactory/getDatastoreService)
